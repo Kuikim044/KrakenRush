@@ -23,12 +23,19 @@ public class Uimanager : MonoBehaviour
     public GameObject skillPage;
     public GameObject upgradeItemPage;
 
+    [Header("Missions Page")]
+    public GameObject questLogPage;
+    public GameObject achievementPage;
+
     [Header("Curency")]
     public TextMeshProUGUI[] coinText;
     public TextMeshProUGUI[] starText;
 
     [Header("Collect Day")]
     public Button[] btnCollectDay;
+
+    public TextMeshProUGUI textScoreMul;
+    public ItemUpgradeData scoreMultipilerData;
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +46,38 @@ public class Uimanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region Check Score
+        if (scoreMultipilerData.currentUpgradeLevel == 0)
+        {
+            GamePlayManager.multiplierScore = 1f;
+        }
 
+        if (scoreMultipilerData.currentUpgradeLevel == 1)
+        {
+            GamePlayManager.multiplierScore = 2f;
+        }
 
+        if (scoreMultipilerData.currentUpgradeLevel == 2)
+        {
+            GamePlayManager.multiplierScore = 4f;
+        }
+
+        if (scoreMultipilerData.currentUpgradeLevel == 3)
+        {
+            GamePlayManager.multiplierScore = 6f;
+        }
+
+        if (scoreMultipilerData.currentUpgradeLevel == 4)
+        {
+            GamePlayManager.multiplierScore = 8f;
+        }
+        if (scoreMultipilerData.currentUpgradeLevel == 5)
+        {
+            GamePlayManager.multiplierScore = 10f;
+        }
+        #endregion
+
+        textScoreMul.text = "x" + GamePlayManager.multiplierScore.ToString();
 
         foreach (TextMeshProUGUI txt in coinText) 
         { 
@@ -171,4 +208,21 @@ public class Uimanager : MonoBehaviour
         upgradeItemPage.SetActive(true);
     }
     #endregion
+
+    #region Mission Page
+
+    public void QuestLog()
+    {
+        questLogPage.SetActive(true);
+        achievementPage.SetActive(false);
+    }
+
+    public void AchivementLog()
+    {
+        achievementPage.SetActive(true);
+        questLogPage.SetActive(false);
+
+    }
+    #endregion
+
 }

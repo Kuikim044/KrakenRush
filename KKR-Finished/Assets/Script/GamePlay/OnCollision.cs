@@ -38,7 +38,7 @@ public class OnCollision : MonoBehaviour
         if (other.gameObject.CompareTag("MultiplierScore"))
         {
             Singleton.Instance.isMultiplierScore = true;
-            GamePlayManager.multiplierScore = 2f;
+            GamePlayManager.multiplierScore *= 2f;
             Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("Obstrucle") )

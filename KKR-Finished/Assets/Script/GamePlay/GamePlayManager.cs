@@ -47,7 +47,7 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject newRecordText;
 
-
+    public ItemUpgradeData scoreMultipilerData;
 
     void Start()
     {
@@ -57,13 +57,44 @@ public class GamePlayManager : MonoBehaviour
 
         waitForplay.SetActive(true);
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
-
+        txtMultipilerScore.text = "x" + multiplierScore.ToString();
     }
 
 
     void FixedUpdate()
     {
         Singleton.Instance.LoadScore();
+
+        #region Check Score
+        if (scoreMultipilerData.currentUpgradeLevel == 0 )
+        {
+            multiplierScore = 1f;
+        }
+
+        if (scoreMultipilerData.currentUpgradeLevel == 1)
+        {
+            multiplierScore = 2f;
+        }
+
+        if (scoreMultipilerData.currentUpgradeLevel == 2)
+        {
+            multiplierScore = 4f;
+        }
+
+        if (scoreMultipilerData.currentUpgradeLevel == 3)
+        {
+            multiplierScore = 6f;
+        }
+
+        if (scoreMultipilerData.currentUpgradeLevel == 4)
+        {
+            multiplierScore = 8f;
+        }
+        if (scoreMultipilerData.currentUpgradeLevel == 5)
+        {
+            multiplierScore = 10f;
+        }
+        #endregion
 
         if (waitForplay.activeSelf)
         {
@@ -127,11 +158,12 @@ public class GamePlayManager : MonoBehaviour
         Debug.Log("Game over");
     }
 
+
     IEnumerator CheckLifeTimeMultiplierScore()
     {
         yield return new WaitForSeconds(Singleton.Instance.multiplierScore);
         Singleton.Instance.isMultiplierScore = false;
-        multiplierScore = 1f;
+        multiplierScore /= 2f;
     }
     IEnumerator CheckLifeTimeMultiplierCoin()
     {

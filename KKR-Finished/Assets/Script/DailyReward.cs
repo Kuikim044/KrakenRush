@@ -13,7 +13,8 @@ public class DailyReward : MonoBehaviour
     private int currentDay = 1;
     private const int maxDays = 30;
 
-    private string[] originalButtonTexts; 
+    private string[] originalButtonTexts;
+    public GameObject[] checkDay;
     private void Awake()
     {
 
@@ -197,10 +198,14 @@ public class DailyReward : MonoBehaviour
                 if (HasClickedDay(i + 1))
                 {
                     ClickButton[i].GetComponentInChildren<TextMeshProUGUI>().text = "Claimed";
+                    checkDay[i].SetActive(true);
+
                 }
                 else
                 {
                     ClickButton[i].GetComponentInChildren<TextMeshProUGUI>().text = "Day" + (i + 1);
+                    checkDay[i].SetActive(false);
+
                 }
             }
 

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553701968395a90488d63c0e94d49da3, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  coin: 98800
-  star: 925
+  coin: 19000000
+  star: 0
   level: 1
   playerName: 
   characters: []

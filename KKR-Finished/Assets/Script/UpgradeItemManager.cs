@@ -32,17 +32,30 @@ public class UpgradeItemManager : MonoBehaviour
 
     private void Start()
     {
-        ResetUpgradeLevel(ref scoreMultiplier.currentUpgradeLevel);
+        /*scoreMultiplier.currentUpgradeLevel = 0;
+        currencyMultiplier.currentUpgradeLevel = 0;
+        coinMagnet.currentUpgradeLevel = 0;
+        bonusMode.currentUpgradeLevel = 0; 
+        protection.currentUpgradeLevel = 0;
+        SaveUpgradeLevel(scoreMultiplier.currentUpgradeLevel);
+        SaveUpgradeLevel(currencyMultiplier.currentUpgradeLevel);
+        SaveUpgradeLevel(coinMagnet.currentUpgradeLevel);
+        SaveUpgradeLevel(bonusMode.currentUpgradeLevel);
+        SaveUpgradeLevel(protection.currentUpgradeLevel);
+
+
+
+        /*ResetUpgradeLevel(ref scoreMultiplier.currentUpgradeLevel);
         ResetUpgradeLevel(ref currencyMultiplier.currentUpgradeLevel);
         ResetUpgradeLevel(ref coinMagnet.currentUpgradeLevel);
         ResetUpgradeLevel(ref bonusMode.currentUpgradeLevel);
-        ResetUpgradeLevel(ref protection.currentUpgradeLevel);
+        ResetUpgradeLevel(ref protection.currentUpgradeLevel);*/
 
-        /* LoadUpgradeLevel(ref scoreMultiplier.currentUpgradeLevel);
+        LoadUpgradeLevel(ref scoreMultiplier.currentUpgradeLevel);
         LoadUpgradeLevel(ref currencyMultiplier.currentUpgradeLevel);
         LoadUpgradeLevel(ref coinMagnet.currentUpgradeLevel);
         LoadUpgradeLevel(ref bonusMode.currentUpgradeLevel);
-        LoadUpgradeLevel(ref protection.currentUpgradeLevel);*/
+        LoadUpgradeLevel(ref protection.currentUpgradeLevel);
 
     }
 
@@ -59,6 +72,34 @@ public class UpgradeItemManager : MonoBehaviour
             barFillScoreMultiplier[3].gameObject.SetActive(true);
         if (scoreMultiplier.currentUpgradeLevel >= 5)
             barFillScoreMultiplier[4].gameObject.SetActive(true);
+
+
+
+
+        if(scoreMultiplier.currentUpgradeLevel == 1)
+        {
+            GamePlayManager.multiplierScore = 2;
+        }
+
+        if (scoreMultiplier.currentUpgradeLevel == 2)
+        {
+            GamePlayManager.multiplierScore = 4;
+        }
+
+        if (scoreMultiplier.currentUpgradeLevel == 3)
+        {
+            GamePlayManager.multiplierScore = 6;
+        }
+
+        if (scoreMultiplier.currentUpgradeLevel == 3)
+        {
+            GamePlayManager.multiplierScore = 8;
+        }
+
+        if (scoreMultiplier.currentUpgradeLevel == 4)
+        {
+            GamePlayManager.multiplierScore = 10;
+        }
         #endregion
 
         #region currencyMultiplier
@@ -113,13 +154,13 @@ public class UpgradeItemManager : MonoBehaviour
             barFillProtection[4].gameObject.SetActive(true);
         #endregion
 
-        Singleton.Instance.lvCorecurrencyMultiplier = currencyMultiplier.currentUpgradeLevel;
-        Singleton.Instance.lvScoreMultiplier = scoreMultiplier.currentUpgradeLevel;
-        Singleton.Instance.lvCoinMagnet = coinMagnet.currentUpgradeLevel;
-        Singleton.Instance.lvBonusmode = bonusMode.currentUpgradeLevel;
-        Singleton.Instance.lvProtection = protection.currentUpgradeLevel;
+        Singleton.Instance.lvCorecurrencyMultiplier = PlayerPrefs.GetInt("ItemUpgradeLevel", currencyMultiplier.currentUpgradeLevel);
+        Singleton.Instance.lvScoreMultiplier = PlayerPrefs.GetInt("ItemUpgradeLevel", scoreMultiplier.currentUpgradeLevel);
+        Singleton.Instance.lvCoinMagnet = PlayerPrefs.GetInt("ItemUpgradeLevel", coinMagnet.currentUpgradeLevel);
+        Singleton.Instance.lvBonusmode = PlayerPrefs.GetInt("ItemUpgradeLevel", bonusMode.currentUpgradeLevel);
+        Singleton.Instance.lvProtection = PlayerPrefs.GetInt("ItemUpgradeLevel", protection.currentUpgradeLevel);
 
-        
+
 
 
 
@@ -144,15 +185,26 @@ public class UpgradeItemManager : MonoBehaviour
         {
             #region upgrade Time
             if (scoreMultiplier.currentUpgradeLevel == 0)
+            {
                 Singleton.Instance.multiplierScore += 2;
+            }
             if (scoreMultiplier.currentUpgradeLevel == 1)
+            {
                 Singleton.Instance.multiplierScore += 3;
+            }
             if (scoreMultiplier.currentUpgradeLevel == 2)
+            {
                 Singleton.Instance.multiplierScore += 3;
+            }
             if (scoreMultiplier.currentUpgradeLevel == 3)
+            {
                 Singleton.Instance.multiplierScore += 5;
+            }
             if (scoreMultiplier.currentUpgradeLevel == 4)
+            {
                 Singleton.Instance.multiplierScore += 10;
+            
+            }
             #endregion
 
             UpgradeItem(ref scoreMultiplier.currentUpgradeLevel);
@@ -295,21 +347,23 @@ public class UpgradeItemManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("äÍà·ÁÍÑ¾à¡Ã´¶Ö§ÃÐ´ÑºÊÙ§ÊØ´áÅéÇ");
+            Debug.Log("");
         }
     }
 
 
     public void SaveUpgradeLevel(int currentUpgradeItem)
     {
-        PlayerPrefs.SetInt("ItemUpgradeLevel", currentUpgradeItem);
+        PlayerPrefs.SetInt("ItemUpgradeLevel_" + currentUpgradeItem.ToString(), currentUpgradeItem);
         PlayerPrefs.Save();
     }
 
+
     public void LoadUpgradeLevel(ref int currentUpgradeItem)
     {
-        currentUpgradeItem = PlayerPrefs.GetInt("ItemUpgradeLevel", 0);
+        currentUpgradeItem = PlayerPrefs.GetInt("ItemUpgradeLevel_" + currentUpgradeItem.ToString(), 0);
     }
+
 
     public string GetPrice(int currentUpgradeLevel)
     {

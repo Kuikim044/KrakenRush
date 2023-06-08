@@ -13,7 +13,7 @@ public class InputNameData : MonoBehaviour
     void Start()
     {
 
-       // PlayerPrefs.DeleteAll();
+       //PlayerPrefs.DeleteAll();
         if (PlayerPrefs.HasKey("username"))
         {
             dialog.SetActive(false);

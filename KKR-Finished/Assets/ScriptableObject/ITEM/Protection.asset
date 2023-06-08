@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxUpgradeLevel: 5
   currentUpgradeLevel: 0
-  prices: e8030000b80b0000401f00005046000070110100
